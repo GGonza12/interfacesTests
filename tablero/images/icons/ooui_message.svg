@@ -1,0 +1,11 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ooui:message" clip-path="url(#clip0_681_6494)">
+<path id="Vector" d="M0 20V40C0 41.3261 0.526784 42.5979 1.46447 43.5355C2.40215 44.4732 3.67392 45 5 45H45C46.3261 45 47.5979 44.4732 48.5355 43.5355C49.4732 42.5979 50 41.3261 50 40V20L25 30L0 20Z" fill="#F0EDED"/>
+<path id="Vector_2" d="M5 5C3.67392 5 2.40215 5.52678 1.46447 6.46447C0.526784 7.40215 0 8.67392 0 10L0 15L25 25L50 15V10C50 8.67392 49.4732 7.40215 48.5355 6.46447C47.5979 5.52678 46.3261 5 45 5H5Z" fill="#F0EDED"/>
+</g>
+<defs>
+<clipPath id="clip0_681_6494">
+<rect width="50" height="50" fill="white"/>
+</clipPath>
+</defs>
+</svg>
