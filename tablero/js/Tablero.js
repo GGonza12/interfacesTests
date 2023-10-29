@@ -8,21 +8,19 @@ class Tablero {
         this.fill = fill;
         this.ctx = ctx;
         this.huecos=[];
-        this.juegoWidth = ((40*2)*cantHorizontal)+40; // 40*2 es el radio*2 del hueco
-        this.juegoHeight = ((40*2)*cantVertical)+20;
+        this.juegoWidth = ((150)*cantHorizontal)+40; // 40*2 es el radio*2 del hueco
+        this.juegoHeight = ((150)*cantVertical)+20;
     }
 
     generarTablero(){
         this.ctx.fillStyle = this.fill;
         this.ctx.fillRect(this.posX, this.posY, this.juegoWidth, this.juegoHeight);
-
+        this.generarHuecos();
+        this.dibujarHuecos();
     }
 
     generarHuecos(){
-        let y = (canvasHeight / 5) + 60;
-        //let y= (juegoWidth/5)+20;
-        // addFicha(500,y,(((juegoWidth/2)/7)-15),ruta);
-
+        let y = (1080 / 5) + 60;
 
 
         for (let i = 0; i < limiteHeight; i++) {
@@ -44,6 +42,8 @@ class Tablero {
         }
     }
 
-    
+
+
+
 
 }
