@@ -1,20 +1,20 @@
-class Circulo extends Figura {
-    constructor(posX, posY, radius, fill, context) {
-        super(posX, posY, fill, context);
-        this.radius = radius;
+class Ficha extends Circulo{
+    constructor(posX, posY, radius, fill,jugador, context) {
+        super(posX, posY, radius, fill, context);
+        this.resaltado = false;
+        this.resaltadoEstilo = "#FF0000";
+        this.jugador = jugador;
     }
-   
-
-    draw() {
-        super.draw();
-        this.context.beginPath();
-        this.context.arc(this.posX, this.posY, this.radius, 0, 2 * Math.PI);
-        this.context.fill();
-        this.context.closePath();
-        
+    setResaltado(resaltado) {
+        this.resaltado = resaltado;
+        console.log("?");
+    }
+    
+    isJugador(jugador){
+        return this.jugador === jugador;
     }
 
-  /*  drawImage(){
+    drawImage(){
         let imgFicha = new Image();
         imgFicha.src = this.fill;
         
@@ -46,38 +46,11 @@ class Circulo extends Figura {
         }; 
         imgFicha.onload =  drawFicha;
     }
-/*
-    drawImage(){
-        this.context.save();
-        this.context.beginPath();
-        this.context.arc(this.posX, this.posY, this.radius, 0, 2 * Math.PI);
-        let imgFicha = new Image();
-        imgFicha.src = this.fill; 
-        let draw = ()=>this.context.drawImage(imgFicha, this.posX, this.posY, this.radius*2, this.radius*2);
-  
-        imgFicha.onload = draw;
-        imgFicha.onload = function() {
-        this.context.drawImage(imgFicha, this.posX, this.posY);
-        
-    }; 
-    this.context.closePath();
-    
-    }
-*/
-    getRadius() {
-        return this.radius;
-    }
-
-   /* isPointInside(x,y){
+    isPointInside(x,y){
         let _x = this.posX - x;
         let _y = this.posY - y;
 
         return Math.sqrt(_x * _x + _y * _y) < this.radius;
-    }*/
-
-    setResaltado(resaltado) {
-        this.resaltado = resaltado;
     }
 
-    
 }
