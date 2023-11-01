@@ -5,6 +5,7 @@ class Juego{
         this.tablero = new Tablero();
         this.ctx = ctx;
         this.fichas = [];
+        this.areaFicha = [];
         this.imgFichas = ["./images/paginaJuego/TT1.png",
         "./images/paginaJuego/TT2.png",
         "./images/paginaJuego/TT3.png",
@@ -16,9 +17,16 @@ class Juego{
         
     }
     empezarJuego(){
+
         this.tablero.generarTablero();
         this.asignarFichas();
+        this.obtenerAreaColocacionFicha();
+        console.log(this.areaFicha);
         this.dibujarFichas();
+    }
+
+    obtenerAreaColocacionFicha(){
+        this.areaFicha = this.tablero.getPutFicha();
     }
 
     setJugadores(jugador1, jugador2){
@@ -59,7 +67,7 @@ class Juego{
                      }
                      let imgCT = Math.floor(Math.random() * (max-min + 1)+min);
                      let ruta = this.imgFichas[imgCT];
-                     let ficha2 = new Ficha(1578, yFicha - 150, (40), ruta,this.jugador2,this.ctx);
+                     let ficha2 = new Ficha(1400, yFicha - 150, (40), ruta,this.jugador2,this.ctx);
                      this.fichas.push(ficha2);
                  }       
                  yFicha = yFicha -20;
@@ -75,20 +83,34 @@ class Juego{
     dibujarFichas(){
 
          for(let i=0;i<this.fichas.length;i++){
-            this.fichas[i].drawImage();
+            this.fichas[i].draw();
          };
     }
-    findClickedFigure(x,y){
+    findClickedFicha(x,y){
         for(let i=0;i< this.fichas.length;i++){
             const element = this.fichas[i];
             if(element.isPointInside(x,y)){
-                console.log("alo2");
                 return element;
             }
         }
     }
+
+    findClickedRect(x,y){
+        for(let i=0;i< this.fichas.length;i++){
+            const element = this.areaFicha[i];
+            if(element.isPointInside(x,y)){
+                console.log(i);
+                return i;
+            }
+        }
+    }
+
+    putFichaMatrix(x,ficha){
+        this.tablero.getWherePutMatrix(x,ficha);
+    }
+
     clearCanvastest(){
-        this.tablero.generarTablero();
+        this.tablero.dibujarTablero();
     }
 
 }

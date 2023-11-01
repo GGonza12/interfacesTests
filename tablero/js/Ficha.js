@@ -4,6 +4,8 @@ class Ficha extends Circulo{
         this.resaltado = false;
         this.resaltadoEstilo = "#FF0000";
         this.jugador = jugador;
+        this.posInicialX= this.posX;
+        this.posInicialY=this.posY;
     }
     setResaltado(resaltado) {
         this.resaltado = resaltado;
@@ -13,8 +15,7 @@ class Ficha extends Circulo{
     isJugador(jugador){
         return this.jugador === jugador;
     }
-
-    drawImage(){
+    draw(){
         let imgFicha = new Image();
         imgFicha.src = this.fill;
         
@@ -51,6 +52,12 @@ class Ficha extends Circulo{
         let _y = this.posY - y;
 
         return Math.sqrt(_x * _x + _y * _y) < this.radius;
+    }
+    getPosInicialX() {
+        return this.posInicialX;
+    }
+    getPosInicialY() {
+        return this.posInicialY;
     }
 
 }

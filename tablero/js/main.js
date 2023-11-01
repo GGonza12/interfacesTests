@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let lastClickedFigure = null;
     let isMouseDown = false;
+    let lastPosX = 856;
+    let lastPosY=349;
     ctx.fillStyle = "#101B27";
     ctx.fillRect(0, 0, 1920, 1080);
     let tablero = new Tablero(500, 500, 7, 6, "#273849", ctx);
@@ -27,12 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-        let clickFig = juego.findClickedFigure(e.offsetX, e.offsetY);
+        let clickFig = juego.findClickedFicha(e.offsetX, e.offsetY);
         if (clickFig != null) {
             console.log("funciona");
             clickFig.setResaltado(true);
+            console.log(clickFig);
             lastClickedFigure = clickFig;
-
+            lastPosX= clickFig.getPosInicialX();
+            lastPosY= clickFig.getPosInicialY();
 
         }
         clearCanvas();
@@ -40,11 +44,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    function onMouseUp() {
+    function onMouseUp(e) {
         isMouseDown = false;
+        let clickRect = juego.findClickedRect(e.offsetX, e.offsetY);
+        if(clickRect==null){
+            
+            lastClickedFigure.setPosition(lastPosX,lastPosY);
+            console.log(clickRect);
+            clearCanvas();
+            juego.dibujarFichas();
+        }
+        if(clickRect!=null)
+        {
+            juego.putFichaMatrix(clickRect,lastClickedFigure);
+        }
     };
 
     function onMouseMove(e) {
+
         if (isMouseDown && lastClickedFigure != null) {
             lastClickedFigure.setPosition(e.offsetX, e.offsetY);
             clearCanvas();
