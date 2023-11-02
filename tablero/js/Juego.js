@@ -25,6 +25,10 @@ class Juego{
         this.dibujarFichas();
     }
 
+    turnoJugador(){
+        
+    }
+
     obtenerAreaColocacionFicha(){
         this.areaFicha = this.tablero.getPutFicha();
     }
@@ -99,7 +103,6 @@ class Juego{
         for(let i=0;i< this.fichas.length;i++){
             const element = this.areaFicha[i];
             if(element.isPointInside(x,y)){
-                console.log(i);
                 return i;
             }
         }

@@ -12,6 +12,7 @@ class Tablero {
         this.juegoHeight = ((100) * cantVertical) + 20;
         this.putFicha = new Array();
         this.matrix = new Array();
+        this.fichasColocadas = 0;
     }
 
     generarTablero() {
@@ -89,49 +90,34 @@ class Tablero {
             }
         }
     }
-    getWherePutMatrix(x, ficha) {
-        for (let i = 0; i < this.cantVertical; i++) {
-            for (let c = 0; c < this.cantHorizontal; c++) {
 
-               /* if ((this.huecos[i][x] instanceof Ficha)||(this.huecos[i][x] == this.huecos[this.cantVertical - 1][x] )) {
-                    let test = this.huecos[i][x];
-                    ficha.setPosition(test.getPosX(), test.getPosY());
-                    this.setFichaTablero(ficha, i, x);
-
-                }*/
-                if ((this.huecos[i][x] != this.huecos[this.cantVertical - 1][x] )) {
-                  //  if(this.huecos[i+1][x] instanceof Ficha){
-                    if(Ficha.prototype.isPrototypeOf(this.huecos[i+1][x])){
-                        let test = this.huecos[i-1][x];
-                        console.log(Ficha.prototype.isPrototypeOf(this.huecos[i+1][x]));
-                        console.log(Ficha.prototype.isPrototypeOf(this.huecos[i-1][x]));
-                        console.log(Ficha.prototype.isPrototypeOf(this.huecos[i][x]));
-                        ficha.setPosition(test.getPosX(), test.getPosY());
-                        this.setFichaTablero(ficha, i-1, x);
-
-                    }
-
-                }
-                else if ((this.huecos[i][x] == this.huecos[this.cantVertical - 1][x] )){
-                    let test = this.huecos[i][x];
-                    ficha.setPosition(test.getPosX(), test.getPosY());
-                    this.setFichaTablero(ficha, i, x);
-                }
+  /*  getWherePutMatrix(x, ficha) {
+        for (let i = this.cantVertical - 1; i >= 0; i--) {
+            if (!Ficha.prototype.isPrototypeOf(this.huecos[i][x])) {
+                let test = this.huecos[i][x];
+                ficha.setPosition(test.getPosX(), test.getPosY());
+                this.setFichaTablero(ficha, i, x);
+                break;
             }
         }
-
-        // for(let x=0; x <this.cantHorizontal;x++){
-        //     console.log(this.huecos[x][i]);
-        //     let test= this.huecos[x][i];
-        //     if(!(this.huecos[x][i]===Ficha)){
-        //         ficha.setPosition(test.getPosX(),test.getPosY());
-        //         this.huecos[x][i] = ficha;
-        //         console.log("test"); 
-        //     }
-        // }
-        console.log(this.huecos);
-
+    }*/
+    getWherePutMatrix(x, ficha) {
+        let encontrado = false;
+        for (let i = this.cantVertical - 1; i >= 0 && !encontrado; i--) {
+            if (!Ficha.prototype.isPrototypeOf(this.huecos[i][x])) {
+                let test = this.huecos[i][x];
+                ficha.setPosition(test.getPosX(), test.getPosY());
+                this.setFichaTablero(ficha, i, x);
+                encontrado = true;
+                this.fichasColocadas++;
+            }
+        }
     }
+    getFichasColocas(){
+        return this.fichasColocadas;
+    }
+
+
     setFichaTablero(ficha, y, x) {
         this.huecos[y][x] = ficha;
     }
