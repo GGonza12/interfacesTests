@@ -3,6 +3,7 @@ class Ficha extends Circulo{
         super(posX, posY, radius, fill, context);
         this.resaltado = false;
         this.resaltadoEstilo = "#FF0000";
+        this.jugador = new Jugador();
         this.jugador = jugador;
         this.posInicialX= this.posX;
         this.posInicialY=this.posY;

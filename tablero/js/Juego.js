@@ -6,6 +6,7 @@ class Juego{
         this.ctx = ctx;
         this.fichas = [];
         this.areaFicha = [];
+        this.turnoJugador = new Jugador();
         this.imgFichas = ["./images/paginaJuego/TT1.png",
         "./images/paginaJuego/TT2.png",
         "./images/paginaJuego/TT3.png",
@@ -25,8 +26,11 @@ class Juego{
         this.dibujarFichas();
     }
 
-    turnoJugador(){
-        
+    setTurnoJugador(jugador){
+        this.turnoJugador= jugador;
+    }
+    getTurnoJugador(){
+        return this.turnoJugador;
     }
 
     obtenerAreaColocacionFicha(){
@@ -109,7 +113,9 @@ class Juego{
     }
 
     putFichaMatrix(x,ficha){
-        this.tablero.getWherePutMatrix(x,ficha);
+        if(ficha!=null){
+            this.tablero.getWherePutMatrix(x,ficha);
+        }
     }
 
     clearCanvastest(){

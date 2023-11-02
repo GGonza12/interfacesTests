@@ -11,6 +11,9 @@ class Jugador {
     setTurno(){
         this.turno=!this.turno;
     }
+    getNombre(){
+        return this.nombre;
+    }
 
     setFichas(fichas){
         this.fichas = fichas;

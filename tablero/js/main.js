@@ -14,12 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let jugador1 = new Jugador("simon");
     let jugador2 = new Jugador("ramon");
     let juego = new Juego(ctx);
-    let turnoJugador = jugador1;
     let fichasEnTablero = 0;
     juego.setJugadores(jugador1, jugador2);
     juego.setTablero(tablero);
     juego.empezarJuego();
-
+    juego.setTurnoJugador(jugador1);
+   
 
    
 
@@ -32,7 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         let clickFig = juego.findClickedFicha(e.offsetX, e.offsetY);
-        if (clickFig != null && (clickFig.isJugador(turnoJugador))) {
+        console.log(clickFig.isJugador(juego.getTurnoJugador()));
+        if (clickFig != null && (clickFig.isJugador(juego.getTurnoJugador()))) {
             clickFig.setResaltado(true);
             console.log(clickFig);
             lastClickedFigure = clickFig;
@@ -58,14 +59,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if(clickRect!=null)
         {
             juego.putFichaMatrix(clickRect,lastClickedFigure);
-            if((fichasEnTablero+1) == tablero.getFichasColocas){
+            if((fichasEnTablero+1) == tablero.getFichasColocas()){
                 
-                if(turnoJugador === jugador2){
-                    turnoJugador= jugador1;
+                if(juego.getTurnoJugador() === jugador1){
+                    juego.setTurnoJugador(jugador2);
                     console.log("dejame jugar");
                 }
                 else{
-                    turnoJugador= jugador2;
+                    juego.setTurnoJugador(jugador1);
                    
                 }
                 fichasEnTablero++;
