@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     juego.setTablero(tablero);
     juego.empezarJuego();
     juego.setTurnoJugador(jugador1);
-   
+    
 
    
 
@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                    
                 }
                 fichasEnTablero++;
+                tablero.verificarGanador(lastClickedFigure);
             }
         }
     };
