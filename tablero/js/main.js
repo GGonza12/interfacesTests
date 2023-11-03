@@ -83,12 +83,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
                 fichasEnTablero++;
-
+                revisarJuego();
 
             }
         }
     };
-
+    function revisarJuego(){
+        let nombreJugador = tablero.revisarGanador();
+        if(nombreJugador!=null){
+            nuevoJuego();
+            setTimeout(function () {
+                alert("El ganador es: "+ nombreJugador);
+            }, 5000);
+           
+         
+        }
+    }
     function onMouseMove(e) {
 
         if (isMouseDown && lastClickedFigure != null) {

@@ -14,6 +14,7 @@ class Tablero {
         this.matrix = new Array();
         this.fichasColocadas = 0;
         this.ultFicha = null;
+        this.ganador=null;
     }
 
     getTamanio() {
@@ -125,16 +126,25 @@ class Tablero {
                 this.ultFicha = ficha;
 
                 if (this.lineaHorizontal(i, ficha.getJugador())) {
-                    alert("Gano el jugador en horizontal " + ficha.getJugador().getNombre());
+                    this.agregarGanador(ficha.getJugador());
+                   // alert("Gano el jugador en horizontal " + ficha.getJugador().getNombre());
                 }
                 if (this.lineaVertical(ficha.getPosXMatrix(), ficha.getJugador())) {
-                    alert("Gano el jugador en vertical " + ficha.getJugador().getNombre());
+                    this.agregarGanador(ficha.getJugador());
+                  //  alert("Gano el jugador en vertical " + ficha.getJugador().getNombre());
                 }
                 if (this.buscarDiagonal(ficha.getJugador())) {
-                    alert("Gano el jugador en Diagonal " + ficha.getJugador().getNombre());
+                    this.agregarGanador(ficha.getJugador());
+                   // alert("Gano el jugador en Diagonal " + ficha.getJugador().getNombre());
                 }
             }
         }
+    }
+    agregarGanador(jugador){
+        this.ganador= jugador.getNombre();
+    }
+    revisarGanador(){
+        return this.ganador;
     }
 
     /* lineaHorizontal(posY, jugador) {
