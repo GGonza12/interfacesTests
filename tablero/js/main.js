@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let lastClickedFigure = null;
     let isMouseDown = false;
     let lastPosX = 856;
-    let lastPosY=349;
+    let lastPosY = 349;
     ctx.fillStyle = "#101B27";
     ctx.fillRect(0, 0, 1920, 1080);
     let tablero = new Tablero(500, 500, 7, 6, "#273849", ctx);
@@ -19,9 +19,24 @@ document.addEventListener("DOMContentLoaded", function () {
     juego.setTablero(tablero);
     juego.empezarJuego();
     juego.setTurnoJugador(jugador1);
-    
+   /* setTimeout(function () {
+        nuevoJuego();
+    }, 5000); */
 
-   
+
+    function nuevoJuego() {
+        ctx.fillStyle = "#101B27";
+    ctx.fillRect(0, 0, 1920, 1080);
+         tablero = new Tablero(500, 500, 7, 6, "#273849", ctx);
+        jugador1 = new Jugador("simon");
+        jugador2 = new Jugador("ramon");
+        juego = new Juego(ctx);
+        fichasEnTablero = 0;
+        juego.setJugadores(jugador1, jugador2);
+        juego.setTablero(tablero);
+        juego.empezarJuego();
+        juego.setTurnoJugador(jugador1);
+    }
 
     function onMouseDown(e) {
         isMouseDown = true;
@@ -34,12 +49,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (clickFig != null && (clickFig.isJugador(juego.getTurnoJugador()))) {
             clickFig.setResaltado(true);
             lastClickedFigure = clickFig;
-            lastPosX= clickFig.getPosInicialX();
-            lastPosY= clickFig.getPosInicialY();
+            lastPosX = clickFig.getPosInicialX();
+            lastPosY = clickFig.getPosInicialY();
 
         }
         clearCanvas();
-       juego.dibujarFichas();
+        juego.dibujarFichas();
 
     }
 
@@ -47,30 +62,29 @@ document.addEventListener("DOMContentLoaded", function () {
         isMouseDown = false;
         let clickRect = juego.findClickedRect(e.offsetX, e.offsetY);
         console.log(clickRect);
-        if(clickRect==null){
-            
-            lastClickedFigure.setPosition(lastPosX,lastPosY);
+        if (clickRect == null) {
+
+            lastClickedFigure.setPosition(lastPosX, lastPosY);
             console.log(clickRect);
             clearCanvas();
             juego.dibujarFichas();
         }
-        if(clickRect!=null)
-        {
-            juego.putFichaMatrix(clickRect,lastClickedFigure);
-            if((fichasEnTablero+1) == tablero.getFichasColocas()){
-                
-                if(juego.getTurnoJugador() === jugador1){
+        if (clickRect != null) {
+            juego.putFichaMatrix(clickRect, lastClickedFigure);
+            if ((fichasEnTablero + 1) == tablero.getFichasColocas()) {
+
+                if (juego.getTurnoJugador() === jugador1) {
                     juego.setTurnoJugador(jugador2);
-                    console.log("Turno del jugador "+juego.getTurnoJugador().getNombre());
+                    console.log("Turno del jugador " + juego.getTurnoJugador().getNombre());
                 }
-                else{
+                else {
                     juego.setTurnoJugador(jugador1);
-                    console.log("Turno del jugador "+juego.getTurnoJugador().getNombre());
-                   
+                    console.log("Turno del jugador " + juego.getTurnoJugador().getNombre());
+
                 }
                 fichasEnTablero++;
-                
-                
+
+
             }
         }
     };
@@ -83,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
             juego.dibujarFichas();
         }
     }
-    function clearCanvas(){
+    function clearCanvas() {
         ctx.fillStyle = "#101B27";
         ctx.fillRect(0, 0, 1920, 1080);
         juego.clearCanvastest();

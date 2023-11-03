@@ -16,7 +16,7 @@ class Tablero {
         this.ultFicha = null;
     }
 
-    getTamanio(){
+    getTamanio() {
         return this.tipoJuego;
     }
 
@@ -106,6 +106,11 @@ class Tablero {
               }
           }
       }*/
+
+    getFichasColocas() {
+        return this.fichasColocadas;
+    }
+
     getWherePutMatrix(x, ficha) {
         let encontrado = false;
         for (let i = this.cantVertical - 1; i >= 0 && !encontrado; i--) {
@@ -115,72 +120,146 @@ class Tablero {
                 this.setFichaTablero(ficha, i, x);
                 encontrado = true;
                 this.fichasColocadas++;
-                ficha.setPosXMatrix(i);
-                ficha.setPosYMatrix(x);
+                ficha.setPosXMatrix(x);
+                ficha.setPosYMatrix(i);
                 this.ultFicha = ficha;
-                
-                console.log(this.lineaHorizontal(i));
-                if(this.lineaHorizontal(i)){
-                    alert("Gano el jugador "+ficha.getJugador().getNombre());
+
+                if (this.lineaHorizontal(i, ficha.getJugador())) {
+                    alert("Gano el jugador en horizontal " + ficha.getJugador().getNombre());
+                }
+                if (this.lineaVertical(ficha.getPosXMatrix(), ficha.getJugador())) {
+                    alert("Gano el jugador en vertical " + ficha.getJugador().getNombre());
+                }
+                if (this.buscarDiagonal(ficha.getJugador())) {
+                    alert("Gano el jugador en Diagonal " + ficha.getJugador().getNombre());
                 }
             }
         }
     }
-    getFichasColocas() {
-        return this.fichasColocadas;
-    }
 
-    lineaHorizontal(posY) {
-
-
-        for (let y = 0; y < this.cantVertical; y++) {
-            let contador = 0;
-            for (let x = 0; x < this.cantHorizontal; x++) {
-                if (Ficha.prototype.isPrototypeOf(this.huecos[posY][x])) {
-                    if (this.huecos[posY][x].isJugador(this.ultFicha.getJugador())) {
-                        contador++;
-                        if (contador == this.tipoJuego) {
-                            return true;
-                        }
-                    }
-                    else {
-                        contador = 0;
-                    }
+    /* lineaHorizontal(posY, jugador) {
+         for (let y = 0; y < this.cantVertical; y++) {
+             let contador = 0;
+             for (let x = 0; x < this.cantHorizontal; x++) {
+                 if (Ficha.prototype.isPrototypeOf(this.huecos[posY][x])) {
+                     if (this.huecos[posY][x].isJugador(jugador)) {
+                         contador++;
+                         if (contador == this.tipoJuego) {
+                             return true;
+                         }
+                     }
+                     else {
+                         contador = 0;
+                     }
+                 }
+ 
+ 
+             }
+         }
+         return false;
+     }*/
+    lineaHorizontal(posY, jugador) {
+        let contador = 0;
+        for (let x = 0; x < this.cantHorizontal; x++) {
+            if (Ficha.prototype.isPrototypeOf(this.huecos[posY][x]) && this.huecos[posY][x].isJugador(jugador)) {
+                contador++;
+                if (contador == this.tipoJuego) {
+                    return true;
                 }
-                
+            } else {
+                contador = 0;
             }
         }
         return false;
     }
 
-    lineaVertical(posY) {
+
+    lineaVertical(posX, jugador) {
         let contador = 0;
         for (let y = 0; y < this.cantVertical; y++) {
+            if (Ficha.prototype.isPrototypeOf(this.huecos[y][posX]) && this.huecos[y][posX].isJugador(jugador)) {
+                contador++;
+                if (contador == this.tipoJuego) {
+                    return true;
+                }
+            } else {
+                contador = 0;
+            }
+        }
+        return false;
+    }
+
+
+    lineaDiagonal(posX, posY, jugador) {
+        // Variables for diagonal checks
+        let x, y, contador;
+
+        // Check bottom-left to top-right
+        contador = 0;
+        for (x = posX, y = posY; x >= 0 && y >= 0; x--, y--) {
+            if (Ficha.prototype.isPrototypeOf(this.huecos[y][x]) && this.huecos[y][x].isJugador(jugador)) {
+                contador++;
+                if (contador == this.tipoJuego) {
+                    return true;
+                }
+            } else {
+                contador = 0;
+            }
+        }
+
+        // Check top-left to bottom-right
+        contador = 0;
+        for (x = posX, y = posY; x < this.cantHorizontal && y < this.cantVertical; x++, y++) {
+            if (Ficha.prototype.isPrototypeOf(this.huecos[y][x]) && this.huecos[y][x].isJugador(jugador)) {
+                contador++;
+                if (contador == this.tipoJuego) {
+                    return true;
+                }
+            } else {
+                contador = 0;
+            }
+        }
+
+        // Check top-right to bottom-left
+        contador = 0;
+        for (x = posX, y = posY; x >= 0 && y < this.cantVertical; x--, y++) {
+            if (Ficha.prototype.isPrototypeOf(this.huecos[y][x]) && this.huecos[y][x].isJugador(jugador)) {
+                contador++;
+                if (contador == this.tipoJuego) {
+                    return true;
+                }
+            } else {
+                contador = 0;
+            }
+        }
+
+        // Check bottom-right to top-left
+        contador = 0;
+        for (x = posX, y = posY; x < this.cantHorizontal && y >= 0; x++, y--) {
+            if (Ficha.prototype.isPrototypeOf(this.huecos[y][x]) && this.huecos[y][x].isJugador(jugador)) {
+                contador++;
+                if (contador == this.tipoJuego) {
+                    return true;
+                }
+            } else {
+                contador = 0;
+            }
+        } 
+
+
+return false; // Devolver false si no se encontró una línea diagonal
+    }
+    buscarDiagonal(jugador) {
+        for (let y = 0; y < this.cantVertical; y++) {
             for (let x = 0; x < this.cantHorizontal; x++) {
-                if (Ficha.prototype.isPrototypeOf(this.huecos[posY][x])) {
-                    console.log(Ficha.prototype.isPrototypeOf(this.huecos[posY][x]));
-                    if (this.huecos[posY][x].isJugador(this.ultFicha.getJugador())) {
-                        contador++;
-                        console.log(contador);
-                        if (contador == this.tipoJuego) {
-                            return true;
-                        }
-                    }
-                } else {
-                    contador = 0; // Reiniciar el contador si se encuentra un espacio vacío
+                if (this.lineaDiagonal(x, y, jugador)) {
+                    return true;
                 }
             }
         }
-        return false; // Si no se encontró una línea completa, retornar false al final.
+        return false; // Devolver false si no se encontró una línea diagonal
     }
 
-    lineaDiagonal() {
-        for (let y = 0; y < this.cantVertical; y++) {
-            let contador = 0;
-            for (let x = 0; x < this.cantHorizontal; x++) {
-            }
-        }
-    }
 
 
     // checkHorizontal(matrix, row, col, color) {
