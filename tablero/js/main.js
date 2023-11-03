@@ -70,7 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
                    
                 }
                 fichasEnTablero++;
-                tablero.verificarGanador(lastClickedFigure);
+                if(tablero.revisarTablero()){
+                    alert("ganaste men");
+                }
+                
             }
         }
     };

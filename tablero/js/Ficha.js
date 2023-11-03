@@ -16,6 +16,10 @@ class Ficha extends Circulo{
     isJugador(jugador){
         return this.jugador === jugador;
     }
+    getJugador(){
+        return this.jugador;
+    }
+
     draw(){
         let imgFicha = new Image();
         imgFicha.src = this.fill;

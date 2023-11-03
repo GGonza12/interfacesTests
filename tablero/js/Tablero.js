@@ -118,74 +118,31 @@ class Tablero {
     getFichasColocas() {
         return this.fichasColocadas;
     }
-    revisarTablero() {
-        //verificar filas
-        for (let y = 0; y < this.cantVertical; y++) {
-            let contador = 0;
-            for (let x = 0; x < this.cantHorizontal; x++) {
-                if (this.matrix[y][x] && this.matrix[y][x].getJugador() === this.ultFicha.getJugador()) {
-                    contador++;
-                    if (contador == 4) {
-                        return true;
-                    }
-                } else {
-                    contador = 0;
-                }
-            }
-        }
-        //verificar columnas
-        for (let y = 0; y < this.cantVertical; y++) {
-            let contador = 0;
-            for (let x = 0; x < this.cantHorizontal; x++) {
-                if (this.matriz[y][x] && matriz[y][x].getJugador() === ficha.getJugador()) {
-                    contador++;
-                    if (contador === 4) {
-                        return true;
-                    }
-                } else {
-                    contador = 0;
-                }
-            }
-        }
-        //verirficar diagonales 
-        for (let y = 0; y < this.cantVertical; y++) {
-            let contador = 0;
-            for (let x = 0; x < this.cantHorizontal; x++) {
-                if (
-                    y + x >= 0 &&
-                    y + x < this.cantHorizontal &&
-                    matriz[x][y + x] &&
-                    matriz[x][y + x].getJugador() === ficha.getJugador()
-                ) {
-                    contador++;
-                    if (contador === 4) {
-                        return true;
-                    }
-                } else {
-                    contador = 0;
-                }
-            }
-        }
-        for (let y =  -this.cantVertical+1; y < this.cantVertical; y++) {
-            let contador = 0;
-            for (let x = 0; x < this.cantHorizontal; x++) {
-                if (
-                    y+ x >= 0 &&
-                    y+ x < this.cantHorizontal &&
-                    matriz[x][this.cantHorizontal - y- x - 1] &&
-                    matriz[x][this.cantHorizontal - y- x - 1].getJugador() === ficha.getJugador()
-                ) {
-                    contador++;
-                    if (contador === 4) {
-                        return true;
-                    }
-                } else {
-                    contador = 0;
-                }
-            }
-        }
 
-        return false;
+    lineaVertical(posY){
+        for (let y = 0; y < this.cantVertical; y++) {
+            let contador = 0;
+            for (let x = 0; x < this.cantHorizontal; x++) {
+                if(this.matrix[posY][x].isJugador(ultFicha.getJugador())){
+                    contador++;
+                    
+                }
+            }
+        }
+    }
+    lineaHorizontal(posX){
+        for (let y = 0; y < this.cantVertical; y++) {
+            let contador = 0;
+            for (let x = 0; x < this.cantHorizontal; x++) {
+            }
+        }
+    }
+    lineaDiagonal(){
+        for (let y = 0; y < this.cantVertical; y++) {
+            let contador = 0;
+            for (let x = 0; x < this.cantHorizontal; x++) {
+            }
+        }
     }
 
 
