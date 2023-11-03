@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
             nuevoJuego();
             setTimeout(function () {
                 alert("El ganador es: "+ nombreJugador);
-            }, 5000);
+            }, 500);
            
          
         }

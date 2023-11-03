@@ -9,6 +9,8 @@ class Ficha extends Circulo{
         this.posInicialY=this.posY;
         this.posXMatrix=null;
         this.posYMatrix=null;
+        this.imgFicha = new Image();
+        this.imgFicha.src = this.fill;
     }
     setResaltado(resaltado) {
         this.resaltado = resaltado;
@@ -35,8 +37,6 @@ class Ficha extends Circulo{
     }
 
     draw(){
-        let imgFicha = new Image();
-        imgFicha.src = this.fill;
         
         let drawFicha = ()=> {
             this.context.save();
@@ -56,7 +56,7 @@ class Ficha extends Circulo{
            // this.context.globalCompositeOperation = "source-over";
         
             // Draw the image
-            this.context.drawImage(imgFicha, (this.posX-this.radius*7+7), (this.posY-(this.radius*3)), this.radius*14,this.radius*14);
+            this.context.drawImage(this.imgFicha, (this.posX-this.radius*7+7), (this.posY-(this.radius*3)), this.radius*14,this.radius*14);
         
             // Restore the context
             this.context.restore();
@@ -64,7 +64,11 @@ class Ficha extends Circulo{
             // Increment posY for next circle
             
         }; 
-        imgFicha.onload =  drawFicha;
+        if(this.imgFicha.complete) {
+            drawFicha();
+        } else {
+            this.imgFicha.onload = drawFicha;
+        }
     }
     isPointInside(x,y){
         let _x = this.posX - x;
