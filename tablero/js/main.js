@@ -28,14 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (lastClickedFigure != null) {
             lastClickedFigure.setResaltado(false);
             lastClickedFigure = null;
-
         }
 
         let clickFig = juego.findClickedFicha(e.offsetX, e.offsetY);
-        console.log(clickFig.isJugador(juego.getTurnoJugador()));
         if (clickFig != null && (clickFig.isJugador(juego.getTurnoJugador()))) {
             clickFig.setResaltado(true);
-            console.log(clickFig);
             lastClickedFigure = clickFig;
             lastPosX= clickFig.getPosInicialX();
             lastPosY= clickFig.getPosInicialY();
@@ -49,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function onMouseUp(e) {
         isMouseDown = false;
         let clickRect = juego.findClickedRect(e.offsetX, e.offsetY);
+        console.log(clickRect);
         if(clickRect==null){
             
             lastClickedFigure.setPosition(lastPosX,lastPosY);
@@ -63,16 +61,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 if(juego.getTurnoJugador() === jugador1){
                     juego.setTurnoJugador(jugador2);
-                    console.log("dejame jugar");
+                    console.log("Turno del jugador "+juego.getTurnoJugador().getNombre());
                 }
                 else{
                     juego.setTurnoJugador(jugador1);
+                    console.log("Turno del jugador "+juego.getTurnoJugador().getNombre());
                    
                 }
                 fichasEnTablero++;
-                if(tablero.revisarTablero()){
-                    alert("ganaste men");
-                }
+                
                 
             }
         }

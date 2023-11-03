@@ -7,12 +7,26 @@ class Ficha extends Circulo{
         this.jugador = jugador;
         this.posInicialX= this.posX;
         this.posInicialY=this.posY;
+        this.posXMatrix=null;
+        this.posYMatrix=null;
     }
     setResaltado(resaltado) {
         this.resaltado = resaltado;
-        console.log("?");
     }
-    
+    setPosXMatrix(x){
+        this.posXMatrix=x;
+    }
+    setPosYMatrix(y){
+        this.posYMatrix=y;
+    }
+    getPosXMatrix(){
+        return this.posXMatrix;
+    }
+
+    getPosYMatrix(){
+        return this.posYMatrix;
+    }
+
     isJugador(jugador){
         return this.jugador === jugador;
     }

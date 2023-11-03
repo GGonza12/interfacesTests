@@ -16,6 +16,10 @@ class Tablero {
         this.ultFicha = null;
     }
 
+    getTamanio(){
+        return this.tipoJuego;
+    }
+
     generarTablero() {
         // this.ctx.fillStyle = this.fill;
         // this.ctx.fillRect(this.posX, this.posY, this.juegoWidth, this.juegoHeight);
@@ -111,7 +115,14 @@ class Tablero {
                 this.setFichaTablero(ficha, i, x);
                 encontrado = true;
                 this.fichasColocadas++;
+                ficha.setPosXMatrix(i);
+                ficha.setPosYMatrix(x);
                 this.ultFicha = ficha;
+                
+                console.log(this.lineaHorizontal(i));
+                if(this.lineaHorizontal(i)){
+                    alert("Gano el jugador "+ficha.getJugador().getNombre());
+                }
             }
         }
     }
@@ -119,25 +130,51 @@ class Tablero {
         return this.fichasColocadas;
     }
 
-    lineaVertical(posY){
+    lineaHorizontal(posY) {
+
+
         for (let y = 0; y < this.cantVertical; y++) {
             let contador = 0;
             for (let x = 0; x < this.cantHorizontal; x++) {
-                if(this.matrix[posY][x].isJugador(ultFicha.getJugador())){
-                    contador++;
-                    
+                if (Ficha.prototype.isPrototypeOf(this.huecos[posY][x])) {
+                    if (this.huecos[posY][x].isJugador(this.ultFicha.getJugador())) {
+                        contador++;
+                        if (contador == this.tipoJuego) {
+                            return true;
+                        }
+                    }
+                    else {
+                        contador = 0;
+                    }
+                }
+                
+            }
+        }
+        return false;
+    }
+
+    lineaVertical(posY) {
+        let contador = 0;
+        for (let y = 0; y < this.cantVertical; y++) {
+            for (let x = 0; x < this.cantHorizontal; x++) {
+                if (Ficha.prototype.isPrototypeOf(this.huecos[posY][x])) {
+                    console.log(Ficha.prototype.isPrototypeOf(this.huecos[posY][x]));
+                    if (this.huecos[posY][x].isJugador(this.ultFicha.getJugador())) {
+                        contador++;
+                        console.log(contador);
+                        if (contador == this.tipoJuego) {
+                            return true;
+                        }
+                    }
+                } else {
+                    contador = 0; // Reiniciar el contador si se encuentra un espacio vacío
                 }
             }
         }
+        return false; // Si no se encontró una línea completa, retornar false al final.
     }
-    lineaHorizontal(posX){
-        for (let y = 0; y < this.cantVertical; y++) {
-            let contador = 0;
-            for (let x = 0; x < this.cantHorizontal; x++) {
-            }
-        }
-    }
-    lineaDiagonal(){
+
+    lineaDiagonal() {
         for (let y = 0; y < this.cantVertical; y++) {
             let contador = 0;
             for (let x = 0; x < this.cantHorizontal; x++) {
@@ -174,4 +211,5 @@ class Tablero {
     getMaxFichas() {
         return this.cantHorizontal * this.cantVertical;
     }
+
 }

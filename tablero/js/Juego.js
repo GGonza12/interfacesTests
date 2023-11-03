@@ -115,6 +115,7 @@ class Juego{
     putFichaMatrix(x,ficha){
         if(ficha!=null){
             this.tablero.getWherePutMatrix(x,ficha);
+           // this.countUp(ficha.getPosXMatrix(),ficha.getPosYMatrix(),ficha.getJugador(),this.tablero);
         }
     }
 
@@ -122,4 +123,17 @@ class Juego{
         this.tablero.dibujarTablero();
     }
 
+    countUp(x, y, player, board) {
+        let tamanioTablero = this.tablero.getTamanio();
+        let startY = (y - tamanioTablero >= 0) ? y - tamanioTablero + 1 : 0;
+        let counter = 0;
+        for (; startY <= y; startY++) {
+            if (board[startY][x].getJugador() === player) {
+                counter++;
+            } else {
+                counter = 0;
+            }
+        }
+        return counter;
+    }
 }
