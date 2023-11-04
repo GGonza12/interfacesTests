@@ -22,7 +22,6 @@ class Juego{
         this.tablero.generarTablero();
         this.asignarFichas();
         this.obtenerAreaColocacionFicha();
-        console.log(this.areaFicha);
         this.dibujarFichas();
     }
 
