@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let lastPosX = 856;
     let lastPosY = 349;
     ctx.fillStyle = "#101B27";
-    ctx.fillRect(0, 0, canvasWidth, 1080);
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     let tablero = new Tablero(500, 500, 7, 6, "#273849", ctx);
-    let jugador1 = new Jugador("simon");
-    let jugador2 = new Jugador("ramon");
+    let jugador1 = new Jugador("Jugador 1");
+    let jugador2 = new Jugador("Jugador 2");
     let juego = new Juego(ctx);
     let fichasEnTablero = 0;
     juego.setJugadores(jugador1, jugador2);
@@ -28,17 +28,25 @@ document.addEventListener("DOMContentLoaded", function () {
     function nuevoJuego() {
         ctx.fillStyle = "#101B27";
     ctx.fillRect(0, 0, 1920, 1080);
-         tablero = new Tablero(500, 500, 7, 6, "#273849", ctx);
-        jugador1 = new Jugador("simon");
-        jugador2 = new Jugador("ramon");
+        tablero = new Tablero(500, 500, 7,6, "#273849", ctx);
+        jugador1 = new Jugador("Jugador 1");
+        jugador2 = new Jugador("Jugador 2");
         juego = new Juego(ctx);
         fichasEnTablero = 0;
         juego.setJugadores(jugador1, jugador2);
         juego.setTablero(tablero);
         juego.empezarJuego();
         juego.setTurnoJugador(jugador1);
+        setTimeout(()=>{
+            alert("Se acabo el tiempo");
+            nuevoJuego();
+        },4000*juego.getTablero().getTamanio());
     }
 
+    // setTimeout(()=>{
+    //     alert("Se acabo el tiempo");
+    //     nuevoJuego();
+    // },4000*juego.getTablero().getTamanio());
     function onMouseDown(e) {
         isMouseDown = true;
         if (lastClickedFigure != null) {
@@ -82,6 +90,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 fichasEnTablero++;
                 revisarJuego();
+                clearCanvas();
+            juego.dibujarFichas();
 
             }
         }
@@ -90,7 +100,11 @@ document.addEventListener("DOMContentLoaded", function () {
         let nombreJugador = tablero.revisarGanador();
         if(nombreJugador!=null){
             nuevoJuego();
-                alert("El ganador es: "+ nombreJugador);
+            alert("El ganador es: "+ nombreJugador);
+            setTimeout(()=>{
+                alert("Se acabo el tiempo");
+                nuevoJuego();
+            },4000*juego.getTablero().getTamanio())
         }
     }
     function onMouseMove(e) {

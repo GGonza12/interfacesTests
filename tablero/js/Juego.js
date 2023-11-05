@@ -14,15 +14,23 @@ class Juego{
         "./images/paginaJuego/CT1.png",
         "./images/paginaJuego/CT2.png",
         "./images/paginaJuego/CT3.png",
-        "./images/paginaJuego/CT4.png"];
+        "./images/paginaJuego/CT4.png"]; 
+
+
         
     }
     empezarJuego(){
 
         this.tablero.generarTablero();
+        this.columnasFichas();
         this.asignarFichas();
         this.obtenerAreaColocacionFicha();
         this.dibujarFichas();
+    }   
+
+    columnasFichas(){
+        this.addRectangulo(this.tablero.getPosXLeft()-220, this.tablero.getPosYLeft(), 150, 700, "#5d79ae");
+        this.addRectangulo(this.tablero.getPosXRight(), this.tablero.getPosYLeft(), 150, 700, "#413a27");
     }
 
     setTurnoJugador(jugador){
@@ -31,6 +39,13 @@ class Juego{
     getTurnoJugador(){
         return this.turnoJugador;
     }
+
+    addRectangulo(x, y, width, height, color) {
+        
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(x,y,width,height);
+
+    };
 
     obtenerAreaColocacionFicha(){
         this.areaFicha = this.tablero.getPutFicha();
@@ -64,7 +79,7 @@ class Juego{
              for (let f = 0; f < maximoFichas; f++) {
                  if(f<maximoFichas/2){
                      let ruta = this.imgFichas[Math.round(Math.random() * 3)];
-                    let ficha = new Ficha(350, yFicha - 150, (40), ruta,this.jugador1, this.ctx);
+                    let ficha = new Ficha(this.tablero.getPosXLeft()-145, yFicha - 150, (40), ruta,this.jugador1, this.ctx);
                  //    fichasJugador1.push(ficha);
                      this.fichas.push(ficha);
                  }
@@ -74,10 +89,10 @@ class Juego{
                      }
                      let imgCT = Math.floor(Math.random() * (max-min + 1)+min);
                      let ruta = this.imgFichas[imgCT];
-                     let ficha2 = new Ficha(1400, yFicha - 150, (40), ruta,this.jugador2,this.ctx);
+                     let ficha2 = new Ficha(this.tablero.getPosXRight()+75, yFicha - 150, (40), ruta,this.jugador2,this.ctx);
                      this.fichas.push(ficha2);
                  }       
-                 yFicha = yFicha -20;
+                 yFicha = yFicha -10;
      
              };
             
@@ -120,6 +135,7 @@ class Juego{
 
     clearCanvastest(){
         this.tablero.dibujarTablero();
+        this.columnasFichas();
     }
 
     countUp(x, y, player, board) {

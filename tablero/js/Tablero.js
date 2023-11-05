@@ -14,12 +14,31 @@ class Tablero {
         this.matrix = new Array();
         this.fichasColocadas = 0;
         this.ganador = null;
+        this.posXLeft=this.posX;
+        this.posYLeft=(600 / 5) +10;
+        this.posXRight=(this.juegoWidth+this.posX+50);
     }
-
+    getPosXLeft(){
+        return this.posXLeft;
+    }
+    getPosYLeft(){
+        return this.posYLeft;
+    }
+    getPosXRight(){
+        return this.posXRight;
+    }
+    getPosYRight(){
+        return this.posYRight;
+    }
     getTamanio() {
         return this.tipoJuego;
     }
-
+    getWidth(){
+        return this.juegoWidth;
+    }
+    getHeight(){
+        return this.juegoHeight;
+    }
     generarTablero() {
         this.generarHuecos();
         this.dibujarHuecos();
@@ -33,11 +52,13 @@ class Tablero {
         return this.putFicha;
     }
 
+
     generarRectangulos() {
         this.putFicha = [];
         let y = (600 / 5) + 60;
         let yAux = y - 100;
-        let xAux = (this.posX + 60);
+        let xAux = (this.posX + 60); 
+        //Cuadrados para indicar donde colocar la ficha
         for (let c = 0; c < this.cantHorizontal; c++) {
             let rectangulo = new Rectangulo(xAux - 50, yAux - 50, 100, 100, "#EEE8AA", this.ctx);
             rectangulo.draw();
