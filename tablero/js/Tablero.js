@@ -58,10 +58,12 @@ class Tablero {
         let y = (600 / 5) + 60;
         let yAux = y - 100;
         let xAux = (this.posX + 60); 
+
         //Cuadrados para indicar donde colocar la ficha
         for (let c = 0; c < this.cantHorizontal; c++) {
             let rectangulo = new Rectangulo(xAux - 50, yAux - 50, 100, 100, "#EEE8AA", this.ctx);
             rectangulo.draw();
+            this.drawArrow(xAux,yAux);
             xAux = (xAux + 100);
             this.putFicha.push(rectangulo);
         }
@@ -78,14 +80,34 @@ class Tablero {
         };
     }
 
+     drawArrow(x, y) {
+        x = x-20;
+        y= y-30;
+        // Dibuja la flecha
+        this.ctx.beginPath();
+        this.ctx.moveTo(x, y);
+        this.ctx.lineTo(x + 40, y);
+        this.ctx.lineTo(x + 40, y + 30);
+        this.ctx.lineTo(x + 60, y + 30);
+        this.ctx.lineTo(x + 20, y + 70);
+        this.ctx.lineTo(x - 20, y + 30);
+        this.ctx.lineTo(x, y + 30);
+        this.ctx.closePath();
+      
+        // Rellena la flecha
+        this.ctx.fillStyle = "black";
+        this.ctx.fill();
+      }
+
     generarHuecos() {
         let y = (600 / 5) + 60;
         let yAux = y - 100;
         let xAux = (this.posX + 60);
         for (let c = 0; c < this.cantHorizontal; c++) {
 
-            let rectangulo = new Rectangulo(xAux - 50, yAux - 50, 100, 100, "#EEE8AA", this.ctx);
+              let rectangulo = new Rectangulo(xAux - 50, yAux - 50, 100, 100, "#EEE8AA", this.ctx);
             rectangulo.draw();
+            this.drawArrow(xAux,yAux);
 
             xAux = (xAux + 100);
             this.putFicha.push(rectangulo);

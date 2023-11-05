@@ -4,6 +4,8 @@ class Rectangulo extends Figura {
 
         this.width = width;
         this.height = height;
+        this.imgFicha = new Image();
+        this.imgFicha.src = this.fill;
     }
 
     draw() {
