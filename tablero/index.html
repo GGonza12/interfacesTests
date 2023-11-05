@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>tablero</title>
 </head>
+
 <body>
-    <canvas id="myCanvas" width="1920" height="1080"></canvas>
-    <button id="linea4">4 en linea</button>
-    <button id="linea5">5 en linea</button>
-    <button id="linea6">6 en linea</button>
-    <button id="linea7">7 en linea</button>
-    <script type="text/javascript" src="js/Figura.js"></script>
-    <script type="text/javascript" src="js/Jugador.js"></script>
-    <script type="text/javascript" src="js/Circulo.js"></script>
-    <script type="text/javascript" src="js/Ficha.js"></script>
-    <script type="text/javascript" src="js/Juego.js"></script>
+    <section>
+        <div class="dificultad">
+            <h2>Seleccione una dificultad:</h2>
+            <button id="linea4">4 en linea</button>
+            <button id="linea5">5 en linea</button>
+            <button id="linea6">6 en linea</button>
+            <button id="linea7">7 en linea</button>
+            <button id="reiniciar-juego">Reiniciar juego</button>
+            <h2 id="timer">00:00:00</h2>
+        </div>
 
-    <script type="text/javascript" src="js/Tablero.js"></script>
+        <canvas id="myCanvas" width="1920" height="1080"></canvas>
 
-    <script type="text/javascript" src="js/Rectangulo.js"></script>
-   <!-- <script type="text/javascript" src="js/tableroTest.js"></script>-->
-    <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/Figura.js"></script>
+        <script type="text/javascript" src="js/Jugador.js"></script>
+        <script type="text/javascript" src="js/Circulo.js"></script>
+        <script type="text/javascript" src="js/Ficha.js"></script>
+        <script type="text/javascript" src="js/Juego.js"></script>
+
+
+        <script type="text/javascript" src="js/Tablero.js"></script>
+
+        <script type="text/javascript" src="js/Rectangulo.js"></script>
+        <!-- <script type="text/javascript" src="js/tableroTest.js"></script>-->
+        <script type="text/javascript" src="js/main.js"></script>
+
+        <div class="dificultad-izq"></div>
+    </section>
+
 </body>
+
 </html>
