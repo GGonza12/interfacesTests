@@ -11,6 +11,13 @@ class Ficha extends Circulo{
         this.posYMatrix=null;
         this.imgFicha = new Image();
         this.imgFicha.src = this.fill;
+        this.locked=false;
+    }
+    setLocked(){
+        this.locked = true;
+    }
+    getLocked(){
+        return this.locked;
     }
     setResaltado(resaltado) {
         this.resaltado = resaltado;

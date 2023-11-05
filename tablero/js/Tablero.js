@@ -158,6 +158,7 @@ class Tablero {
                 this.fichasColocadas++;
                 ficha.setPosXMatrix(x);
                 ficha.setPosYMatrix(i);
+                ficha.setLocked();
 
                 if (this.lineaHorizontal(i, ficha.getJugador())) {
                     this.agregarGanador(ficha.getJugador());

@@ -59,10 +59,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let clickFig = juego.findClickedFicha(e.offsetX, e.offsetY);
         if (clickFig != null && (clickFig.isJugador(juego.getTurnoJugador()))) {
-            clickFig.setResaltado(true);
-            lastClickedFigure = clickFig;
-            lastPosX = clickFig.getPosInicialX();
-            lastPosY = clickFig.getPosInicialY();
+            if(!clickFig.getLocked()){
+                clickFig.setResaltado(true);
+                lastClickedFigure = clickFig;
+                lastPosX = clickFig.getPosInicialX();
+                lastPosY = clickFig.getPosInicialY();
+            }
 
         }
         clearCanvas();
@@ -112,9 +114,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function onMouseMove(e) {
 
         if (isMouseDown && lastClickedFigure != null) {
-            lastClickedFigure.setPosition(e.offsetX, e.offsetY);
-            clearCanvas();
-            juego.dibujarFichas();
+            if(!lastClickedFigure.getLocked()){
+                lastClickedFigure.setPosition(e.offsetX, e.offsetY);
+                clearCanvas();
+                juego.dibujarFichas();
+
+            }
         }
     }
     function clearCanvas() {
