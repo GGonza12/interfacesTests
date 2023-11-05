@@ -18,6 +18,12 @@ class Tablero {
         this.posYLeft=(600 / 5) +10;
         this.posXRight=(this.juegoWidth+this.posX+50);
     }
+    getWidthHuecos(){
+        return this.cantHorizontal;
+    }
+    getHeightHuecos(){
+        return this.cantVertical;
+    }
     getPosXLeft(){
         return this.posXLeft;
     }
