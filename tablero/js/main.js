@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("timer").innerHTML = h + ":" + m + ":" + s;
 
-        if (((tablero.getWidthHuecos() == 7) && (tablero.getHeightHuecos() == 6)) && (this.minutes == 2 && this.seconds == 1)) {
+        if (((tablero.getWidthHuecos() == 7) && (tablero.getHeightHuecos() == 6)) && (minutes == 2 && seconds == 1)) {
             console.log("ejecutada");
             stopTimer();
             alert("El tiempo terminó: EMPATE");
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             stopTimer();
         }
 
-        if (((tablero.getWidthHuecos() == 8) && (tablero.getHeightHuecos() == 7)) && (this.minutes == 3 && this.seconds == 1)) {
+        if (((tablero.getWidthHuecos() == 8) && (tablero.getHeightHuecos() == 7)) && (minutes == 3 && seconds == 1)) {
             console.log("ejecutada");
             stopTimer();
             alert("El tiempo terminó: EMPATE");
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
             stopTimer();
         }
 
-        if (((tablero.getWidthHuecos() == 9) && (tablero.getHeightHuecos() == 8)) && (this.minutes == 4 && this.seconds == 1)) {
+        if (((tablero.getWidthHuecos() == 9) && (tablero.getHeightHuecos() == 8)) && (minutes == 4 && seconds == 1)) {
             console.log("ejecutada");
             stopTimer();
             alert("El tiempo terminó: EMPATE");
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             stopTimer();
         }
 
-        if (((tablero.getWidthHuecos() == 10) && (tablero.getHeightHuecos() == 9)) && (this.minutes == 5 && this.seconds == 1)) {
+        if (((tablero.getWidthHuecos() == 10) && (tablero.getHeightHuecos() == 9)) && (minutes == 5 && seconds == 1)) {
             console.log("ejecutada");
             stopTimer();
             alert("El tiempo terminó: EMPATE");
@@ -223,6 +223,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("#linea5").addEventListener("click", function () { cantLinea(8, 7) }, false);
     document.querySelector("#linea6").addEventListener("click", function () { cantLinea(9, 8) }, false);
     document.querySelector("#linea7").addEventListener("click", function () { cantLinea(10, 9) }, false);
+    document.querySelector("#iniciar-juego").addEventListener("click", function () {
+        nuevoJuego(tablero.getWidthHuecos(), tablero.getHeightHuecos());
+    });
     document.querySelector("#reiniciar-juego").addEventListener("click", function () {
         nuevoJuego(tablero.getWidthHuecos(), tablero.getHeightHuecos());
     });
